@@ -1,4 +1,4 @@
 package br.com.clinicavt.dtos;
 
-public record ConsultaRecordDto(String nome, String raca, String dono) {
+public record ConsultaRecordDto(String responsavel, String raca, String paciente) {
 }
