@@ -1,4 +1,4 @@
-package br.com.clinicavt.dtos;
+package br.com.clinicavt.infra.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

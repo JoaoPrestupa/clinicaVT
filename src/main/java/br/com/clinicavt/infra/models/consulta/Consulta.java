@@ -1,5 +1,6 @@
-package br.com.clinicavt.models;
+package br.com.clinicavt.infra.models.consulta;
 
+import br.com.clinicavt.infra.dto.ConsultaRecordDto;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.hateoas.RepresentationModel;
@@ -11,7 +12,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "tb_consultas")
-public class ConsultaModel extends RepresentationModel<ConsultaModel> implements Serializable {
+public class Consulta extends RepresentationModel<Consulta> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -33,6 +34,26 @@ public class ConsultaModel extends RepresentationModel<ConsultaModel> implements
 
     // VeterinarioModel veterinario;
 
+
+    public Consulta(ConsultaRecordDto consultaDto) {
+        this.responsavel = consultaDto.responsavel();
+        this.raca = consultaDto.raca();
+        this.paciente = consultaDto.paciente();
+    }
+
+    public void updateConsulta(DadosAtualizacaoConsulta dados){
+
+        if(dados.raca() != null){
+            this.raca =  dados.raca();
+        }
+        if (dados.responsavel() != null){
+            this.responsavel = dados.responsavel();
+        }
+        if (dados.paciente() != null){
+            this.paciente = dados.paciente();
+        }
+
+    }
 
     public UUID getIdConsulta() {
         return idConsulta;

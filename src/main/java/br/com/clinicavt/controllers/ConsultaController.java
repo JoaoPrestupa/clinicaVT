@@ -1,61 +1,57 @@
 package br.com.clinicavt.controllers;
 
-import br.com.clinicavt.dtos.ConsultaRecordDto;
-import br.com.clinicavt.models.ConsultaModel;
+import br.com.clinicavt.infra.dto.ConsultaRecordDto;
+import br.com.clinicavt.infra.models.consulta.Consulta;
+import br.com.clinicavt.infra.models.consulta.DadosAtualizacaoConsulta;
 import br.com.clinicavt.repositories.ConsultaRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
-
 @RestController
+@RequestMapping("/consultas")
 public class ConsultaController {
 
     @Autowired
     ConsultaRepository consultaRepository;
 
-    @GetMapping("/consultas")
-    public ResponseEntity<List<ConsultaModel>> getAllConsultas(){
-        List<ConsultaModel> consultaList = consultaRepository.findAll();
-        if(!consultaList.isEmpty()){
-            for (ConsultaModel consulta : consultaList){
-                UUID id = consulta.getIdConsulta();
-                consulta.add(linkTo(methodOn(ConsultaController.class).getOneConsulta(id)).withSelfRel());
-            }
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(consultaList);
+    @GetMapping
+    public ResponseEntity<Page<Consulta>> getAllConsulta(@PageableDefault(size = 5, sort = {"paciente"})Pageable paginacao){
+        var page = consultaRepository.findAll(paginacao);
+        return ResponseEntity.ok(page);
     }
 
-    @GetMapping("/consultas/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Object> getOneConsulta(@PathVariable ("id") UUID id){
-        Optional<ConsultaModel> consultaO = consultaRepository.findById((id));
+        Optional<Consulta> consultaO = consultaRepository.findById((id));
         if (consultaO.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Consulta não agendada");
         }
-        consultaO.get().add(linkTo(methodOn(ConsultaController.class).getAllConsultas()).withRel("Consulta Encontrada!"));
-        return ResponseEntity.status(HttpStatus.OK).body(consultaO.get());
+        return ResponseEntity.ok("Consulta Encontrada! " + consultaRepository.getReferenceById(id));
     }
 
-    @PostMapping("/consultas")
-    public ResponseEntity<ConsultaModel> saveConsulta(@RequestBody @Valid ConsultaRecordDto consultaDto){
-        var consultaModel = new ConsultaModel();
-        BeanUtils.copyProperties(consultaDto, consultaModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(consultaRepository.save(consultaModel));
+    @PostMapping
+    @Transactional
+    public ResponseEntity createConsulta(@RequestBody @Valid ConsultaRecordDto dadosConsulta, UriComponentsBuilder uriBuilder){
+        var consulta = new Consulta(dadosConsulta);
+        consultaRepository.save(consulta);
+        var uri = uriBuilder.path("/consultas/{id}").buildAndExpand(consulta.getIdConsulta()).toUri();
+        return ResponseEntity.created(uri).body(consulta);
     }
 
-    @DeleteMapping("/consultas/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteConsulta(@PathVariable (value = "id") UUID id){
-        Optional<ConsultaModel> consultaO = consultaRepository.findById((id));
+        Optional<Consulta> consultaO = consultaRepository.findById((id));
         if (consultaO.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Consulta não encontrada ou não agendada.");
         }
@@ -63,15 +59,16 @@ public class ConsultaController {
         return ResponseEntity.status(HttpStatus.OK).body("Consulta deletada com sucesso.");
     }
 
-    @PutMapping("/consultas/{id}")
-    public ResponseEntity<Object> updateConsulta(@PathVariable(value = "id") UUID id, @RequestBody @Valid ConsultaRecordDto consultaDto){
-        Optional<ConsultaModel> consultaO = consultaRepository.findById((id));
+    @PatchMapping
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateConsulta(@PathVariable(value = "id") UUID id, @RequestBody @Valid DadosAtualizacaoConsulta dados){
+        Optional<Consulta> consultaO = consultaRepository.findById((id));
         if (consultaO.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Consulta não encontrada ou não agendada.");
         }
-        var consultaModel = consultaO.get();
-        BeanUtils.copyProperties(consultaDto, consultaModel);
-        return ResponseEntity.status(HttpStatus.OK).body(consultaRepository.save(consultaModel));
+        var consulta = consultaRepository.getReferenceById(id);
+        consulta.updateConsulta(dados);
+        return ResponseEntity.ok("Consulta atualizada com sucesso." + dados);
     }
 
 

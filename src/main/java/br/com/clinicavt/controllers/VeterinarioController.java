@@ -1,7 +1,6 @@
 package br.com.clinicavt.controllers;
 
-import br.com.clinicavt.dtos.VeterinarioRecordDto;
-import br.com.clinicavt.models.VeterinarioModel;
+import br.com.clinicavt.infra.dto.VeterinarioRecordDto;
 import br.com.clinicavt.repositories.VeterinarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;

@@ -1,4 +1,4 @@
-package br.com.clinicavt.dtos;
+package br.com.clinicavt.infra.dto;
 
 import br.com.clinicavt.models.EnderecoEmbeddable;
 import br.com.clinicavt.models.Especialidade;

@@ -1,4 +1,4 @@
-package br.com.clinicavt.models;
+package br.com.clinicavt.infra.models.veterinario;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "tb_veterinarios")
-public class VeterinarioModel extends RepresentationModel<VeterinarioModel> implements Serializable {
+public class Veterinario extends RepresentationModel<Veterinario> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

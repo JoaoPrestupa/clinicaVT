@@ -1,4 +1,4 @@
-package br.com.clinicavt.models;
+package br.com.clinicavt.infra.models.veterinario;
 
 public enum Especialidade {
     ACUNPUNTURA,
