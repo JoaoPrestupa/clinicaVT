@@ -11,6 +11,4 @@ import java.util.UUID;
 @Repository
 public interface ConsultaRepository extends JpaRepository<Consulta, UUID> {
 
-    Page<Consulta> findByIdAtivo(Pageable paginacao);
-
 }

@@ -28,7 +28,7 @@ public class ConsultaController {
     @GetMapping
     public ResponseEntity<Page<Consulta>> getAllConsulta(@PageableDefault(size = 5, sort = {"paciente"})Pageable paginacao){
         var page = consultaRepository.findAll(paginacao);
-        return ResponseEntity.ok(page);
+        return ResponseEntity.status(HttpStatus.OK).body(page);
     }
 
     @GetMapping("/{id}")
@@ -37,7 +37,7 @@ public class ConsultaController {
         if (consultaO.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Consulta não agendada");
         }
-        return ResponseEntity.ok("Consulta Encontrada! " + consultaRepository.getReferenceById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(consultaRepository.getReferenceById(id));
     }
 
     @PostMapping
@@ -46,7 +46,7 @@ public class ConsultaController {
         var consulta = new Consulta(dadosConsulta);
         consultaRepository.save(consulta);
         var uri = uriBuilder.path("/consultas/{id}").buildAndExpand(consulta.getIdConsulta()).toUri();
-        return ResponseEntity.created(uri).body(consulta);
+        return ResponseEntity.status(HttpStatus.CREATED).location(uri).body(consulta);
     }
 
     @DeleteMapping("/{id}")
@@ -59,7 +59,6 @@ public class ConsultaController {
         return ResponseEntity.status(HttpStatus.OK).body("Consulta deletada com sucesso.");
     }
 
-    @PatchMapping
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateConsulta(@PathVariable(value = "id") UUID id, @RequestBody @Valid DadosAtualizacaoConsulta dados){
         Optional<Consulta> consultaO = consultaRepository.findById((id));
@@ -68,8 +67,7 @@ public class ConsultaController {
         }
         var consulta = consultaRepository.getReferenceById(id);
         consulta.updateConsulta(dados);
-        return ResponseEntity.ok("Consulta atualizada com sucesso." + dados);
+        return ResponseEntity.status(HttpStatus.OK).body("Consulta atualizada com sucesso" + dados);
     }
-
 
 }
