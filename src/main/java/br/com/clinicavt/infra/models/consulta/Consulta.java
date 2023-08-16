@@ -1,14 +1,18 @@
 package br.com.clinicavt.infra.models.consulta;
 
 import br.com.clinicavt.infra.dto.ConsultaRecordDto;
+import br.com.clinicavt.infra.models.veterinario.Veterinario;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Table(name = "tb_consultas")
@@ -18,7 +22,6 @@ public class Consulta extends RepresentationModel<Consulta> implements Serializa
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private UUID idConsulta;
 
     private String responsavel;
@@ -27,12 +30,12 @@ public class Consulta extends RepresentationModel<Consulta> implements Serializa
 
     private String paciente;
 
-//adicionados dia 02/08
-   // private String problema;
+   private String problema;
 
-   // private LocalDate data;
+   private LocalDate data;
 
-    // VeterinarioModel veterinario;
+   @JoinColumn()
+   Veterinario nome;
 
 
     public Consulta(ConsultaRecordDto consultaDto) {

@@ -1,20 +1,20 @@
 package br.com.clinicavt.controllers;
 
 import br.com.clinicavt.infra.dto.ConsultaRecordDto;
+import br.com.clinicavt.infra.framework.ResponseCollectionDTO;
 import br.com.clinicavt.infra.models.consulta.Consulta;
 import br.com.clinicavt.infra.models.consulta.DadosAtualizacaoConsulta;
 import br.com.clinicavt.repositories.ConsultaRepository;
+import br.com.clinicavt.services.ConsultaService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,19 +25,21 @@ public class ConsultaController {
     @Autowired
     ConsultaRepository consultaRepository;
 
+    @Autowired
+    private ConsultaService service;
+
     @GetMapping
-    public ResponseEntity<Page<Consulta>> getAllConsulta(@PageableDefault(size = 5, sort = {"paciente"})Pageable paginacao){
-        var page = consultaRepository.findAll(paginacao);
-        return ResponseEntity.status(HttpStatus.OK).body(page);
+    public ResponseEntity<ResponseCollectionDTO<Consulta>> getAllConsulta(){
+        List<Consulta> consultaO = service.findAllConsultas();
+        if (consultaO.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(ResponseCollectionDTO.of(service.findAllConsultas()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOneConsulta(@PathVariable ("id") UUID id){
-        Optional<Consulta> consultaO = consultaRepository.findById((id));
-        if (consultaO.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Consulta não agendada");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(consultaRepository.getReferenceById(id));
+    public ResponseEntity<Consulta> findById (@PathVariable("id") UUID id){
+        return ResponseEntity.ok(service.findById(id));
     }
 
     @PostMapping
