@@ -1,6 +1,6 @@
 package br.com.clinicavt.infra.models.veterinario;
 
-import br.com.clinicavt.infra.dto.DadosEnderecoDto;
+import br.com.clinicavt.infra.models.DadosEnderecoDto;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

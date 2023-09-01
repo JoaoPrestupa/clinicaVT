@@ -1,6 +1,5 @@
-package br.com.clinicavt.infra.models.pets;
+package br.com.clinicavt.infra.models.pet;
 
-import br.com.clinicavt.infra.dto.PetsRecordDto;
 import br.com.clinicavt.infra.models.cliente.Cliente;
 import br.com.clinicavt.infra.models.consulta.Consulta;
 import br.com.clinicavt.infra.models.vacinacao.Vacinacao;

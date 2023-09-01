@@ -1,13 +1,11 @@
 package br.com.clinicavt.infra.models.vacinacao;
 
-
-import br.com.clinicavt.infra.dto.VacinacaoRecordDto;
 import br.com.clinicavt.infra.models.medicamento.Medicamento;
-import br.com.clinicavt.infra.models.pets.Pet;
+import br.com.clinicavt.infra.models.pet.Pet;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.springframework.hateoas.RepresentationModel;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -24,10 +22,13 @@ public class Vacinacao extends RepresentationModel<Vacinacao> implements Seriali
 
     @Id
     private UUID id;
+    @NotBlank
     private Pet animal;
+    @NotBlank
     private Medicamento medicamento;
     @Temporal(TemporalType.DATE)
     private Date data;
+    @NotBlank
     private BigDecimal valor;
 
     public Vacinacao(VacinacaoRecordDto vacinacaoDto){

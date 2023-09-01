@@ -1,4 +1,4 @@
-package br.com.clinicavt.infra.models.cirurgia;
+package br.com.clinicavt.infra.models.internacao;
 
 import br.com.clinicavt.infra.models.cliente.Cliente;
 import br.com.clinicavt.infra.models.medicamento.Medicamento;
@@ -17,51 +17,46 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "cirurgia")
-public class Cirurgia extends RepresentationModel<Cirurgia> implements Serializable {
+@Table(name = "internacao")
+public class Internacao extends RepresentationModel<Internacao> implements Serializable {
 
     @Serial
     private static final Long serialVersionUUID = 1L;
 
     @Id
     private UUID id;
+
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer codigo;
+
     @NotBlank
     private Pet animal;
+
     @NotBlank
     private Cliente cliente;
+
     @NotBlank
     private Veterinario veterinario;
-    private Medicamento medicamento;
-    private String descricao;
+
     @Temporal(TemporalType.DATE)
     private Date data;
-    private Boolean ativo;
-    private Boolean sucesso;
+
+    private Medicamento medicamento;
+
     @NotBlank
     private BigDecimal valor;
 
-    public Cirurgia(CirurgiaRecordDto cirurgiaDto){
-        this.id = UUID.randomUUID();
-        this.codigo = cirurgiaDto.codigo();
-        this.animal = cirurgiaDto.animal();
-        this.cliente = cirurgiaDto.cliente();
-        this.veterinario = cirurgiaDto.veterinario();
-        this.medicamento = cirurgiaDto.medicamento();
-        this.descricao = cirurgiaDto.descricao();
-        this.data = cirurgiaDto.data();
-        this.ativo = cirurgiaDto.ativo();
-        this.sucesso = cirurgiaDto.sucesso();
-        this.valor = cirurgiaDto.valor();
+    public Internacao(InternacaoRecordDto internacaoDto){
+        this.animal = internacaoDto.animal();
+        this.cliente = internacaoDto.cliente();
+        this.veterinario = internacaoDto.veterinario();
+        this.data = internacaoDto.data();
+        this.medicamento = internacaoDto.medicamento();
+        this.valor = internacaoDto.valor();
     }
 
-    public void updateCirurgia(DadosAtualizacaoCirurgia dados){
-
-        if (dados.codigo() != null){
-            this.codigo = dados.codigo();
-        }
-        if (dados.animal() != null){
+    public void updateInternacao(DadosAtualizacaoInternacao dados){
+        if(dados.animal() != null){
             this.animal = dados.animal();
         }
         if (dados.cliente() != null){
@@ -70,11 +65,15 @@ public class Cirurgia extends RepresentationModel<Cirurgia> implements Serializa
         if (dados.veterinario() != null){
             this.veterinario = dados.veterinario();
         }
+        if (dados.data() != null){
+            this.data = dados.data();
+        }
         if (dados.medicamento() != null){
             this.medicamento = dados.medicamento();
         }
-
-
+        if (dados.valor() != null){
+            this.valor = dados.valor();
+        }
     }
 
 }

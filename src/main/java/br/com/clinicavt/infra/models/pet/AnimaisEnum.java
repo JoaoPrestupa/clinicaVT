@@ -1,4 +1,4 @@
-package br.com.clinicavt.infra.models.pets;
+package br.com.clinicavt.infra.models.pet;
 
 public enum AnimaisEnum {
     CACHORRO,

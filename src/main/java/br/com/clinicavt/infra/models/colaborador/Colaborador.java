@@ -1,13 +1,8 @@
 package br.com.clinicavt.infra.models.colaborador;
 
-
-import br.com.clinicavt.infra.dto.ColaboradorRecordDto;
 import br.com.clinicavt.infra.models.veterinario.Veterinario;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.hateoas.RepresentationModel;
@@ -15,6 +10,7 @@ import org.springframework.hateoas.RepresentationModel;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -36,9 +32,12 @@ public class Colaborador extends RepresentationModel<Colaborador> implements Ser
     @NotBlank
     private BigDecimal salario;
     private Veterinario veterinario;
+    @Temporal(TemporalType.DATE)
+    private Date dataEntrada;
 
     public Colaborador(ColaboradorRecordDto colaboradorDto){
         this.id = UUID.randomUUID();
+        this.dataEntrada = colaboradorDto.dataEntrada();
         this.codigo = colaboradorDto.codigo();
         this.nome = colaboradorDto.nome();
         this.funcao = colaboradorDto.funcao();
@@ -64,6 +63,9 @@ public class Colaborador extends RepresentationModel<Colaborador> implements Ser
         }
         if (dados.veterinario() != null){
             this.veterinario = dados.veterinario();
+        }
+        if (dados.dataEntrada() != null){
+            this.dataEntrada = dados.dataEntrada();
         }
     }
 

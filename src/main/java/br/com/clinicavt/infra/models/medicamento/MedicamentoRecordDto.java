@@ -1,4 +1,4 @@
-package br.com.clinicavt.infra.dto;
+package br.com.clinicavt.infra.models.medicamento;
 
 import java.math.BigDecimal;
 

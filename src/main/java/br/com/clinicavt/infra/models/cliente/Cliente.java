@@ -1,7 +1,6 @@
 package br.com.clinicavt.infra.models.cliente;
 
 
-import br.com.clinicavt.infra.dto.ClienteRecordDto;
 import br.com.clinicavt.infra.models.veterinario.EnderecoEmbeddable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -12,6 +11,7 @@ import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
@@ -40,6 +40,9 @@ public class Cliente extends RepresentationModel<Cliente> implements Serializabl
     private Boolean ativo;
     @Temporal(TemporalType.DATE)
     private Date nascimento;
+    @NotBlank
+    private BigDecimal cpf;
+
 
     public void updateConsulta(DadosAtualizacaoCliente dados){
         if (dados.nome() != null){
@@ -63,6 +66,9 @@ public class Cliente extends RepresentationModel<Cliente> implements Serializabl
         if (dados.nascimento() != null){
             this.nascimento = dados.nascimento();
         }
+        if (dados.cpf() != null){
+            this.cpf = dados.cpf();
+        }
     }
 
     public Cliente(ClienteRecordDto clinicaDto){
@@ -75,6 +81,7 @@ public class Cliente extends RepresentationModel<Cliente> implements Serializabl
         this.ativo = clinicaDto.ativo();
         this.nascimento = clinicaDto.nascimento();
         this.codigo = clinicaDto.codigo();
+        this.cpf = clinicaDto.cpf();
     }
 
 }
