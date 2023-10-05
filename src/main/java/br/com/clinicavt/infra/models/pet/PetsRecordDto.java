@@ -8,5 +8,5 @@ import java.util.Date;
 
 public record PetsRecordDto(String nome, Cliente cliente, Consulta dataUltimaConsulta,
                             Boolean ativo, String descricaoPet, AnimaisEnum animal, String raca,
-                            Date nascimento, Vacinacao vacinacao, Integer codigo) {
+                            Date nascimento, Vacinacao vacinacao) {
 }

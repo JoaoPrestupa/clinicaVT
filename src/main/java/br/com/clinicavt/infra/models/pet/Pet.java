@@ -35,6 +35,7 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
     private String raca;
     @Temporal(TemporalType.DATE)
     private Date nascimento;
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer codigo;
     private Vacinacao vacinacao;
 
@@ -48,7 +49,6 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
         this.animal = petsDto.animal();
         this.raca = petsDto.raca();
         this.nascimento = petsDto.nascimento();
-        this.codigo = petsDto.codigo();
         this.vacinacao = petsDto.vacinacao();
     }
 
@@ -76,9 +76,6 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
         }
         if (dados.nascimento() != null){
             this.nascimento = dados.nascimento();
-        }
-        if (dados.codigo() != null){
-            this.codigo = dados.codigo();
         }
         if (this.vacinacao != null){
             this.vacinacao = dados.vacinacao();

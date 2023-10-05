@@ -3,12 +3,10 @@ package br.com.clinicavt.services;
 import br.com.clinicavt.infra.models.consulta.Consulta;
 import br.com.clinicavt.repositories.ConsultaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class ConsultaService {
@@ -16,31 +14,37 @@ public class ConsultaService {
     @Autowired
     private ConsultaRepository repository;
 
+    @Autowired
+    private Consulta consultaBD;
+
     public List<Consulta> findAllConsultas(){
-        return repository.findAllConsultas();
+        return repository.findAll();
     }
 
-    public Consulta findById(UUID id){
-        return repository.findByIdConsulta(id); //lançaria uma excessao em caso de erro
+    public Optional<Integer> findByCodigo(Integer codigo){
+        return Optional.ofNullable(consultaBD.getCodigo());
     }
 
     public Consulta insert(Consulta consulta){
-        final Optional<Consulta> consultaRecuperada = repository.findById(consulta.getIdConsulta());
-
-        if (consultaRecuperada.isPresent()){
-            // excessao lançada
+        final Optional<Consulta> consultaRecuperado = repository.findByCodigo(consulta.getCodigo());
+        if (consultaRecuperado.isPresent()){
+            // jogar uma exception
         }
-        return repository.insert(consulta);
+        return repository.save(consulta);
     }
 
     public Consulta update(Consulta consulta){
-        final Consulta consultaRecuperada = repository.findByIdConsulta(consulta.getIdConsulta());//lançaria excessao em caso de erro
-        consulta.setIdConsulta(consultaRecuperada.getIdConsulta());
-        return repository.update(consulta);
+        final Optional<Consulta> consultaRecuperado = repository.findByCodigo(consulta.getCodigo());
+
+        consulta.setId(consultaRecuperado.orElseThrow().getId());
+
+        return repository.updateConsulta(consulta);
+
     }
 
-    public Consulta delete(UUID id){
-        return repository.delete(id);
+    public Consulta deleteByCodigo(Integer codigo){
+        return repository.deleteConsulta(codigo); // lançar exception em caso de consulta n encontrada
     }
+
 
 }

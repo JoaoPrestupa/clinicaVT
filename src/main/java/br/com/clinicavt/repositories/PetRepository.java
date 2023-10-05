@@ -2,25 +2,22 @@ package br.com.clinicavt.repositories;
 
 import br.com.clinicavt.infra.models.cliente.Cliente;
 import br.com.clinicavt.infra.models.pet.Pet;
-import br.com.clinicavt.infra.models.pet.PetsRecordDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface PetRepository extends JpaRepository<Pet, UUID> {
 
-    //  Consulta insert(Consulta consulta);
-    /*
-        Consulta findByIdConsulta(UUID id);
-    List<Consulta> findAllConsultas();
-    Consulta update(Consulta consulta);
-    Consulta delete(UUID id);
-    */
+    Pet insertPet(Pet pet);
 
-    Pet createPet(Cliente cliente, Pet pet);
-    Pet findPetByCodigo(Integer codigo);
-    Pet findAllPet();
+    Pet findPetByName(String name);
+
+    List<Pet> findAllPet();
+
     Pet updatePet(Pet pet);
-    Pet deletePet(UUID id);
+
+    Pet deletePet(Integer codigo);
 
 }

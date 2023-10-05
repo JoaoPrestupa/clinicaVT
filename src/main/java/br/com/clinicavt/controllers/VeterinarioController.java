@@ -1,3 +1,5 @@
+/*
+
 package br.com.clinicavt.controllers;
 
 import br.com.clinicavt.infra.dto.VeterinarioRecordDto;
@@ -69,3 +71,4 @@ public class VeterinarioController {
     }
 
 }
+*/

@@ -1,6 +1,7 @@
+/*
+
 package br.com.clinicavt.controllers;
 
-import br.com.clinicavt.infra.dto.ConsultaRecordDto;
 import br.com.clinicavt.infra.framework.ResponseCollectionDTO;
 import br.com.clinicavt.infra.models.consulta.Consulta;
 import br.com.clinicavt.infra.models.consulta.DadosAtualizacaoConsulta;
@@ -73,3 +74,6 @@ public class ConsultaController {
     }
 
 }
+
+
+ */

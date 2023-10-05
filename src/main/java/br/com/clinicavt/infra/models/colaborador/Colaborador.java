@@ -23,6 +23,7 @@ public class Colaborador extends RepresentationModel<Colaborador> implements Ser
 
     @Id
     private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer codigo;
     @NotBlank
     @Size(min = 5, message = "O nome deve conter no mínimo 5 letras.")
@@ -38,7 +39,6 @@ public class Colaborador extends RepresentationModel<Colaborador> implements Ser
     public Colaborador(ColaboradorRecordDto colaboradorDto){
         this.id = UUID.randomUUID();
         this.dataEntrada = colaboradorDto.dataEntrada();
-        this.codigo = colaboradorDto.codigo();
         this.nome = colaboradorDto.nome();
         this.funcao = colaboradorDto.funcao();
         this.salario = colaboradorDto.salario();
@@ -49,9 +49,6 @@ public class Colaborador extends RepresentationModel<Colaborador> implements Ser
     }
 
     public void updateColaborador(DadosAtualizacaoColaborador dados){
-        if (dados.codigo() != null){
-            this.codigo = dados.codigo();
-        }
         if (dados.nome() != null){
             this.nome = dados.nome();
         }
