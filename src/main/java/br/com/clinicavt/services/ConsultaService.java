@@ -1,6 +1,6 @@
 package br.com.clinicavt.services;
 
-import br.com.clinicavt.infra.models.consulta.Consulta;
+import br.com.clinicavt.models.consulta.Consulta;
 import br.com.clinicavt.repositories.ConsultaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

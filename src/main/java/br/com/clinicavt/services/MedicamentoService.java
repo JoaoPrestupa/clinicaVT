@@ -1,12 +1,6 @@
 package br.com.clinicavt.services;
 
-import br.com.clinicavt.infra.models.medicamento.Medicamento;
-import br.com.clinicavt.repositories.MedicamentoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MedicamentoService {

@@ -1,8 +1,6 @@
 package br.com.clinicavt.infra.framework;
 
-import br.com.clinicavt.infra.models.consulta.Consulta;
 import lombok.Data;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 

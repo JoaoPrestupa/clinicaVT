@@ -1,6 +1,6 @@
 package br.com.clinicavt.repositories;
 
-import br.com.clinicavt.infra.models.equipamento.Equipamento;
+import br.com.clinicavt.models.equipamento.Equipamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

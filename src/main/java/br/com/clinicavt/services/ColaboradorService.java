@@ -1,42 +1,50 @@
 package br.com.clinicavt.services;
 
-import br.com.clinicavt.infra.models.colaborador.Colaborador;
+import br.com.clinicavt.models.colaborador.Colaborador;
 import br.com.clinicavt.repositories.ColaboradorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ColaboradorService {
 
 
     private ColaboradorRepository repository;
+    private Colaborador model;
 
     public List<Colaborador> findAllColaborador(){
-        return repository.findAllColaborador();
+        return repository.findAll();
     }
 
-    public Optional<Colaborador> findColaboradorByName(String name){
-        return Optional.ofNullable(repository.findColaboradorByName(name)); // lançar exception em caso de erro
+    public Optional<Colaborador> findColaboradorByName(String name){                                    // exception
+
+        Optional<Colaborador> colaboradorRecuperado = Optional.of(repository.findColaboradorByName(name).orElseThrow());
+
+        return colaboradorRecuperado;
     }
 
     public Colaborador insert (Colaborador colaborador){
-        final Optional<Colaborador> colaboradorRecuperado = Optional.ofNullable(repository.findColaboradorByName(colaborador.getNome()));
-        if (colaboradorRecuperado.isPresent()){
+        final boolean colaboradorRecuperado = repository.existsById(colaborador.getId());
+        if (colaboradorRecuperado == true){
             // exception
         }
-        return repository.insertColaborador(colaborador);
+        return repository.save(colaborador);
     }
 
-    public Colaborador update(Colaborador colaborador){
-        final Optional<Colaborador> colaboradorRecuperdo = Optional.ofNullable(repository.findColaboradorByName(colaborador.getNome()));
-        colaborador.setId(colaboradorRecuperdo.get().getId());
+    public Colaborador update(UUID id, Colaborador colaborador){
+        final Optional<Colaborador> colaboradorRecuperdo = Optional.of(repository.getReferenceById(id));
+        if (colaboradorRecuperdo.isEmpty()) {
+            // exception
+        }
         return repository.updateColaborador(colaborador);
     }
 
-    public Colaborador deleteColaborador(Integer codigo){
-        return repository.deleteColaborador(codigo);
+    public Colaborador delete(UUID id){
+        Optional<Colaborador> colaborador = repository.getReferenceById(id).setAtivo(false); // lançar exception
+
+        return repository.deleteColaborador(id);
     }
 
 

@@ -1,8 +1,7 @@
 package br.com.clinicavt.services;
 
-import br.com.clinicavt.infra.models.veterinario.Veterinario;
+import br.com.clinicavt.models.veterinario.Veterinario;
 import br.com.clinicavt.repositories.VeterinarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
