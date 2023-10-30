@@ -1,7 +1,7 @@
 package br.com.clinicavt.services;
 
-import br.com.clinicavt.models.cliente.Clients;
-import br.com.clinicavt.repositories.ClientsRepository;
+import br.com.clinicavt.models.cliente.Client;
+import br.com.clinicavt.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,15 +10,15 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class ClientsService {
+public class ClientService {
     @Autowired
-    private ClientsRepository repository;
+    private ClientRepository repository;
 
-    public List<Clients> getdAll(){
+    public List<Client> getdAll(){
         return repository.findAll();
     }
 
-    public Optional<Clients> getById (UUID id){
+    public Optional<Client> getById (UUID id){
         if (!repository.existsById(id)){
             // exception de client not found
         }
@@ -26,7 +26,7 @@ public class ClientsService {
         return repository.findById(id);
     }
 
-    public Clients create (Clients cliente){
+    public Client create (Client cliente){
         return repository.save(cliente);
     }
 

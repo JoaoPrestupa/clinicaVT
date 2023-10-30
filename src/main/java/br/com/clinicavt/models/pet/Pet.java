@@ -1,7 +1,7 @@
 package br.com.clinicavt.models.pet;
 
-import br.com.clinicavt.models.cliente.Clients;
-import br.com.clinicavt.models.vacinacao.Vacinacao;
+import br.com.clinicavt.models.cliente.Client;
+import br.com.clinicavt.models.veterinarian.Veterinanian;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -45,9 +45,9 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date nascimento;
 
-    private Vacinacao vacinacao;
+    private Veterinanian vacinacao;
 
-    private Clients nameClients;
+    private Client nameClients;
 
     private Boolean ativo;
 

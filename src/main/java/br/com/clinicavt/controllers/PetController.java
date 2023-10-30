@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -50,8 +49,25 @@ public class PetController {
 
     @PutMapping
     @Transactional
-    public ResponseEntity<Pet> update (@RequestBody @Valid PetUpdate petUpdate){
+    public ResponseEntity<Pet> update (@RequestBody @Valid PetUpdate pets){
+        var pet = repository.getReferenceById(pets.id());
+        pet.updateConsulta(pets);
+        service.create(pet);
+        pet.setId(pets.id());
+        final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pets.id()).toUri();
 
+        return ResponseEntity.status(HttpStatus.OK).location(location).body(pet);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Optional<Pet>> delete (@PathVariable UUID id){
+        var pet = repository.getReferenceById(id);
+        pet.delete();
+
+        var petFound = service.getById(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(petFound);
     }
 
 }

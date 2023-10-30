@@ -1,10 +1,10 @@
 package br.com.clinicavt.controllers;
 
-import br.com.clinicavt.models.cliente.Clients;
-import br.com.clinicavt.models.cliente.ClientsDto;
-import br.com.clinicavt.models.cliente.ClientsUpdate;
-import br.com.clinicavt.repositories.ClientsRepository;
-import br.com.clinicavt.services.ClientsService;
+import br.com.clinicavt.models.cliente.Client;
+import br.com.clinicavt.models.cliente.ClientDto;
+import br.com.clinicavt.models.cliente.ClientUpdate;
+import br.com.clinicavt.repositories.ClientRepository;
+import br.com.clinicavt.services.ClientService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,26 +22,26 @@ import java.util.UUID;
 public class ClientsController {
 
     @Autowired
-    private ClientsService service;
+    private ClientService service;
 
     @Autowired
-    private ClientsRepository repository;
+    private ClientRepository repository;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Clients>> getById(@PathVariable UUID id){
+    public ResponseEntity<Optional<Client>> getById(@PathVariable UUID id){
         var client = service.getById(id);
 
         return ResponseEntity.status(HttpStatus.OK).body(client);
     }
 
     @GetMapping
-    public ResponseEntity<List<Clients>> getAll(){
+    public ResponseEntity<List<Client>> getAll(){
         return ResponseEntity.ok(service.getdAll());
     }
 
     @PostMapping
-    public ResponseEntity<Clients> create(@RequestBody @Valid ClientsDto clients){
-        var clientCreate = new Clients(clients);
+    public ResponseEntity<Client> create(@RequestBody @Valid ClientDto clients){
+        var clientCreate = new Client(clients);
         service.create(clientCreate);
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(clientCreate.getId()).toUri();
 
@@ -50,7 +50,7 @@ public class ClientsController {
 
     @PutMapping
     @Transactional
-    public ResponseEntity<Clients> update(@RequestBody @Valid ClientsUpdate clients){
+    public ResponseEntity<Client> update(@RequestBody @Valid ClientUpdate clients){
         var client = repository.getReferenceById(clients.id());
         client.updateClients(clients);
         service.create(client);

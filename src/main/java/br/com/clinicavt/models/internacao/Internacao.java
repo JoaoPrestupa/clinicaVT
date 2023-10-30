@@ -1,6 +1,6 @@
 package br.com.clinicavt.models.internacao;
 
-import br.com.clinicavt.models.cliente.Clients;
+import br.com.clinicavt.models.cliente.Client;
 import br.com.clinicavt.models.medicamento.Medicamento;
 import br.com.clinicavt.models.pet.Pet;
 import br.com.clinicavt.models.veterinario.Veterinario;
@@ -33,7 +33,7 @@ public class Internacao extends RepresentationModel<Internacao> implements Seria
     private Pet animal;
 
     @NotBlank
-    private Clients cliente;
+    private Client cliente;
 
     @NotBlank
     private Veterinario veterinario;

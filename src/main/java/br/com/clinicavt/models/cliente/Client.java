@@ -22,9 +22,9 @@ import java.util.UUID;
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Clients")
-@Table(name = "clients")
-public class Clients extends RepresentationModel<Clients> implements Serializable {
+@Entity(name = "Client")
+@Table(name = "client")
+public class Client extends RepresentationModel<Client> implements Serializable {
 
     @Serial
     private static final Long serialVersionUUID = 1L;
@@ -39,7 +39,7 @@ public class Clients extends RepresentationModel<Clients> implements Serializabl
     private Date dataCadastro;
     @Embedded
     private EnderecoEmbeddable endereco;
-    @Email(message = "Deve ser inserido um endereço de E-mail válido.")
+    @Email(message = "Deve ser inserido um endereço de e-mail válido.")
     @Column(unique = true)
     private String email;
 
@@ -55,7 +55,7 @@ public class Clients extends RepresentationModel<Clients> implements Serializabl
 
     private Boolean ativo;
 
-    public void updateClients (ClientsUpdate dados){
+    public void updateClients (ClientUpdate dados){
         if (dados.nome() != null){
             this.nome = dados.nome();
         }
@@ -76,7 +76,7 @@ public class Clients extends RepresentationModel<Clients> implements Serializabl
         }
     }
 
-    public Clients(@Valid ClientsDto clinicaDto){
+    public Client(@Valid ClientDto clinicaDto){
         this.id = UUID.randomUUID();
         this.nome = clinicaDto.nome();
         this.dataCadastro = clinicaDto.dataCadastro();

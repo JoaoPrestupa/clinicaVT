@@ -1,11 +1,11 @@
 package br.com.clinicavt.models.financeiro;
 
 import br.com.clinicavt.models.cirurgia.Cirurgia;
-import br.com.clinicavt.models.colaborador.Colaborador;
+import br.com.clinicavt.models.colaborador.Employe;
 import br.com.clinicavt.models.consulta.Consulta;
 import br.com.clinicavt.models.equipamento.Equipamento;
 import br.com.clinicavt.models.internacao.Internacao;
-import br.com.clinicavt.models.vacinacao.Vacinacao;
+import br.com.clinicavt.models.veterinarian.Veterinanian;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -29,7 +29,7 @@ public class Financeiro extends RepresentationModel<Financeiro> implements Seria
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer codigo;
     @NotBlank
-    private Colaborador salarioColaborador;
+    private Employe salarioColaborador;
     @NotBlank
     private Internacao valorInternacao;
     @NotBlank
@@ -39,7 +39,7 @@ public class Financeiro extends RepresentationModel<Financeiro> implements Seria
     @NotBlank
     private Consulta valorConsulta;
     @NotBlank
-    private Vacinacao valorVacinacao;
+    private Veterinanian valorVacinacao;
     private Boolean ativo;
 
 

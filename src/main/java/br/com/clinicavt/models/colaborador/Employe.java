@@ -4,60 +4,52 @@ import br.com.clinicavt.models.veterinario.Veterinario;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Optional;
 import java.util.UUID;
 
 @Data
-@EqualsAndHashCode
-@Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "colaborador")
-public class Colaborador extends RepresentationModel<Colaborador> implements Serializable {
+@Table(name = "employe")
+public class Employe extends RepresentationModel<Employe> implements Serializable {
 
     @Serial
     private static final Long serialVersionUUID = 1L;
 
     @Id
-    private UUID id;
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer codigo;
+    private UUID id;
+
     @NotBlank
-    @Size(min = 5, message = "O nome deve conter no mínimo 5 letras.")
+    @Size(min = 5, message = "O nome deve conter no mínimo 5 caracteres.")
     private String nome;
-    @NotBlank
+
     private String funcao;
-    @NotBlank
+
     private BigDecimal salario;
-    private Veterinario veterinario;
+
     @Temporal(TemporalType.DATE)
     private Date dataEntrada;
-    @Column(columnDefinition = "boolean default true")
+
     private Boolean ativo;
 
-    public Colaborador(ColaboradorRecordDto colaboradorDto){
+    public Employe(EmployeDto colaboradorDto){
         this.id = UUID.randomUUID();
         this.dataEntrada = colaboradorDto.dataEntrada();
         this.nome = colaboradorDto.nome();
         this.funcao = colaboradorDto.funcao();
         this.salario = colaboradorDto.salario();
-        if (this.veterinario != null){
-            this.veterinario = colaboradorDto.veterinario();
-        }
         this.ativo = true;
     }
 
-    public void updateColaborador(DadosAtualizacaoColaborador dados){
+    public void updateEmploye(EmployeUpdate dados){
         if (dados.nome() != null){
             this.nome = dados.nome();
         }
@@ -67,23 +59,13 @@ public class Colaborador extends RepresentationModel<Colaborador> implements Ser
         if (dados.salario() != null){
             this.salario = dados.salario();
         }
-        if (dados.veterinario() != null){
-            this.veterinario = dados.veterinario();
-        }
         if (dados.dataEntrada() != null){
             this.dataEntrada = dados.dataEntrada();
         }
-        if (dados.ativo() != null){
-            this.ativo = dados.ativo();
-        }
-    }
-    public Boolean isAtivo(){
-        return ativo;
     }
 
-    public Optional<Colaborador> setAtivo(Boolean ativo){
-        this.ativo = ativo;
-        return null;
+    public void delete(){
+        this.ativo = false;
     }
 
 }

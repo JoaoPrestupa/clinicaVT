@@ -1,6 +1,6 @@
 package br.com.clinicavt.models.cirurgia;
 
-import br.com.clinicavt.models.cliente.Clients;
+import br.com.clinicavt.models.cliente.Client;
 import br.com.clinicavt.models.medicamento.Medicamento;
 import br.com.clinicavt.models.pet.Pet;
 import br.com.clinicavt.models.veterinario.Veterinario;
@@ -30,7 +30,7 @@ public class Cirurgia extends RepresentationModel<Cirurgia> implements Serializa
     @NotBlank
     private Pet animal;
     @NotBlank
-    private Clients cliente;
+    private Client cliente;
     @NotBlank
     private Veterinario veterinario;
     private Medicamento medicamento;

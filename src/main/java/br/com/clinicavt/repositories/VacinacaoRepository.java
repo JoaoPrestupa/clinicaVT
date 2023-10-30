@@ -1,21 +1,21 @@
 package br.com.clinicavt.repositories;
 
-import br.com.clinicavt.models.vacinacao.Vacinacao;
+import br.com.clinicavt.models.veterinarian.Veterinanian;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.UUID;
 
-public interface VacinacaoRepository extends JpaRepository<Vacinacao, UUID> {
+public interface VacinacaoRepository extends JpaRepository<Veterinanian, UUID> {
 
-    Vacinacao vacinar(Vacinacao vacinacao);
+    Veterinanian vacinar(Veterinanian vacinacao);
 
-    Vacinacao vacinacaoByPetName(String name);
+    Veterinanian vacinacaoByPetName(String name);
 
-    List<Vacinacao> findAllVacinacao();
+    List<Veterinanian> findAllVacinacao();
 
-    Vacinacao updateVacinacao(Vacinacao vacinacao);
+    Veterinanian updateVacinacao(Veterinanian vacinacao);
 
-    Vacinacao deleteVacinacao(Integer codigo);
+    Veterinanian deleteVacinacao(Integer codigo);
 
 }

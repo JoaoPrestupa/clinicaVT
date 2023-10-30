@@ -1,6 +1,6 @@
 package br.com.clinicavt.models.consulta;
 
-import br.com.clinicavt.models.cliente.Clients;
+import br.com.clinicavt.models.cliente.Client;
 import br.com.clinicavt.models.pet.Pet;
 import br.com.clinicavt.models.veterinario.Veterinario;
 import jakarta.persistence.*;
@@ -29,7 +29,7 @@ public class Consulta extends RepresentationModel<Consulta> implements Serializa
     @Temporal(TemporalType.DATE)
     private Date data;
     @NotBlank
-    private Clients cliente;
+    private Client cliente;
     @NotBlank
     private Boolean web;
     @NotBlank
