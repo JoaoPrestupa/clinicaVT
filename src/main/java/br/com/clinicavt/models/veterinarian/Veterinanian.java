@@ -1,6 +1,6 @@
 package br.com.clinicavt.models.veterinarian;
 
-import br.com.clinicavt.models.veterinario.EnderecoEmbeddable;
+import br.com.clinicavt.models.AdressesEmbeddable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ public class Veterinanian extends RepresentationModel<Veterinanian> implements S
     private String name;
 
     @Embedded
-    private EnderecoEmbeddable adress;
+    private AdressesEmbeddable adress;
 
     @Email(message = "Um veterinário deve conter um endereço de email válido.")
     private String email;
@@ -57,9 +57,9 @@ public class Veterinanian extends RepresentationModel<Veterinanian> implements S
         this.ativo = true;
     }
 
-    public void updateVeterinarian(VeterinarianDto data){
-        if (data.data() != null){
-            this.data = data.data();
+    public void updateVeterinarian(VeterinarianUpdate data){
+        if (data.name() != null){
+            this.name = data.name();
         }
         if (data.adress() != null){
             this.adress = data.adress();

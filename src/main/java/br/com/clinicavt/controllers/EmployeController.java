@@ -1,8 +1,8 @@
 package br.com.clinicavt.controllers;
 
-import br.com.clinicavt.models.colaborador.Employe;
-import br.com.clinicavt.models.colaborador.EmployeDto;
-import br.com.clinicavt.models.colaborador.EmployeUpdate;
+import br.com.clinicavt.models.employe.Employe;
+import br.com.clinicavt.models.employe.EmployeDto;
+import br.com.clinicavt.models.employe.EmployeUpdate;
 import br.com.clinicavt.repositories.EmployeRepository;
 import br.com.clinicavt.services.EmployeService;
 import jakarta.transaction.Transactional;

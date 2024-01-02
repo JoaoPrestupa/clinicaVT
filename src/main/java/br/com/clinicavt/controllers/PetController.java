@@ -39,7 +39,7 @@ public class PetController {
     }
 
     @PostMapping
-    public  ResponseEntity<Pet> create (PetDto pet){
+    public  ResponseEntity<Pet> create (@RequestBody @Valid PetDto pet){
         var petInserted = new Pet(pet);
         service.create(petInserted);
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(petInserted.getId()).toUri();
@@ -51,7 +51,7 @@ public class PetController {
     @Transactional
     public ResponseEntity<Pet> update (@RequestBody @Valid PetUpdate pets){
         var pet = repository.getReferenceById(pets.id());
-        pet.updateConsulta(pets);
+        pet.updatePet(pets);
         service.create(pet);
         pet.setId(pets.id());
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pets.id()).toUri();

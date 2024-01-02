@@ -1,6 +1,6 @@
 package br.com.clinicavt.services;
 
-import br.com.clinicavt.models.colaborador.Employe;
+import br.com.clinicavt.models.employe.Employe;
 import br.com.clinicavt.repositories.EmployeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

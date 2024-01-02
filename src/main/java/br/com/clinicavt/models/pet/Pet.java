@@ -1,10 +1,8 @@
 package br.com.clinicavt.models.pet;
 
-import br.com.clinicavt.models.cliente.Client;
-import br.com.clinicavt.models.veterinarian.Veterinanian;
+import br.com.clinicavt.models.client.Client;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,22 +30,23 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
     private UUID id;
 
     @NotBlank
-    @Size(min = 5, message = "Um nome deve conter no mínimo 5 caracteres.")
     private String nome;
 
     private String descricaoPet;
 
     @Enumerated(EnumType.STRING)
-    private AnimaisEnum animal;
+    private PetEnum animal;
 
     private String raca;
 
     @Temporal(TemporalType.DATE)
     private Date nascimento;
 
-    private Veterinanian vacinacao;
+    private String welfare_animal;
 
-    private Client nameClients;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cliente_id")
+    private Client client;
 
     private Boolean ativo;
 
@@ -58,17 +57,13 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
         this.animal = petsDto.animal();
         this.raca = petsDto.raca();
         this.nascimento = petsDto.nascimento();
-        this.nameClients = petsDto.nameClients();
-        this.vacinacao = petsDto.vacinacao();
+        this.welfare_animal = petsDto.welfare_animal();
         this.ativo = true;
     }
 
-    public void updateConsulta(PetUpdate dados){
+    public void updatePet(PetUpdate dados){
         if (dados.nome() != null){
             this.nome = dados.nome();
-        }
-        if (dados.nameClients() != null){
-            this.nameClients = dados.nameClients();
         }
         if (dados.descricaoPet() != null){
             this.descricaoPet = dados.descricaoPet();
@@ -82,8 +77,8 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
         if (dados.nascimento() != null){
             this.nascimento = dados.nascimento();
         }
-        if (dados.vacinacao() != null){
-            this.vacinacao = dados.vacinacao();
+        if (dados.welfare_animal() != null){
+            this.welfare_animal = dados.welfare_animal();
         }
     }
 

@@ -1,8 +1,8 @@
 package br.com.clinicavt.controllers;
 
-import br.com.clinicavt.models.cliente.Client;
-import br.com.clinicavt.models.cliente.ClientDto;
-import br.com.clinicavt.models.cliente.ClientUpdate;
+import br.com.clinicavt.models.client.Client;
+import br.com.clinicavt.models.client.ClientDto;
+import br.com.clinicavt.models.client.ClientUpdate;
 import br.com.clinicavt.repositories.ClientRepository;
 import br.com.clinicavt.services.ClientService;
 import jakarta.transaction.Transactional;
@@ -36,7 +36,7 @@ public class ClientsController {
 
     @GetMapping
     public ResponseEntity<List<Client>> getAll(){
-        return ResponseEntity.ok(service.getdAll());
+        return ResponseEntity.ok(service.getAll());
     }
 
     @PostMapping
@@ -53,8 +53,8 @@ public class ClientsController {
     public ResponseEntity<Client> update(@RequestBody @Valid ClientUpdate clients){
         var client = repository.getReferenceById(clients.id());
         client.updateClients(clients);
-        service.create(client);
-        client.setId(clients.id());
+        service.create(client); // ! Testar retira-la pra ver se realmente é necessária.
+        client.setId(clients.id()); // !
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(client.getId()).toUri();
 
         return ResponseEntity.status(HttpStatus.OK).location(location).body(client);

@@ -1,18 +1,20 @@
 package br.com.clinicavt.models.pet;
 
-import br.com.clinicavt.models.cliente.Client;
-import br.com.clinicavt.models.consulta.Consulta;
+import br.com.clinicavt.models.client.Client;
+import br.com.clinicavt.models.consult.Consult;
 import br.com.clinicavt.models.veterinarian.Veterinanian;
 
 import java.util.Date;
+import java.util.UUID;
 
 public record PetDto(String nome,
-                     Client nameClients,
-                     Consulta dataUltimaConsulta,
+                     Consult dataUltimaConsulta,
                      Boolean ativo,
                      String descricaoPet,
-                     AnimaisEnum animal,
+                     PetEnum animal,
                      String raca,
                      Date nascimento ,
-                     Veterinanian vacinacao) {
+                     String welfare_animal,
+                     Veterinanian vacinacao,
+                     UUID client_id) {
 }

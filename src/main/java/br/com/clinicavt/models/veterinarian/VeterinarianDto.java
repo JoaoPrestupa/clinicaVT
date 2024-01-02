@@ -1,11 +1,9 @@
 package br.com.clinicavt.models.veterinarian;
 
-import br.com.clinicavt.models.medicamento.Medicamento;
-import br.com.clinicavt.models.pet.Pet;
-import br.com.clinicavt.models.veterinario.EnderecoEmbeddable;
+import br.com.clinicavt.models.AdressesEmbeddable;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public record VeterinarianDto(String name, String crmv, String email, EnderecoEmbeddable adress, Date data, BigDecimal salary) {
+public record VeterinarianDto(String name, String crmv, String email, AdressesEmbeddable adress, Date data, BigDecimal salary) {
 }
