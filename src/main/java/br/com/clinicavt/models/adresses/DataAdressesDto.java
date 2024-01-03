@@ -1,4 +1,4 @@
-package br.com.clinicavt.models;
+package br.com.clinicavt.models.adresses;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

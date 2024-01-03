@@ -1,7 +1,7 @@
 package br.com.clinicavt.models.client;
 
 
-import br.com.clinicavt.models.AdressesEmbeddable;
+import br.com.clinicavt.models.adresses.AdressesEmbeddable;
 import br.com.clinicavt.models.pet.Pet;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -9,25 +9,102 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@Data
+
+// testar retirar os metodos getters e setters para substituir pelas anottations @Data ou @Setter e @Getter
+
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "Client")
 @Table(name = "client")
 public class Client extends RepresentationModel<Client> implements Serializable {
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public AdressesEmbeddable getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(AdressesEmbeddable endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public Date getNascimento() {
+        return nascimento;
+    }
+
+    public void setNascimento(Date nascimento) {
+        this.nascimento = nascimento;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public List<Pet> getPetList() {
+        return petList;
+    }
+
+    public void setPetList(List<Pet> petList) {
+        this.petList = petList;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
 
     @Serial
     private static final Long serialVersionUUID = 1L;

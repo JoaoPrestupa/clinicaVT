@@ -1,5 +1,7 @@
 package br.com.clinicavt.controllers;
 
+import br.com.clinicavt.models.adresses.AdressesEmbeddable;
+import br.com.clinicavt.models.adresses.AdressesUpdate;
 import br.com.clinicavt.models.client.Client;
 import br.com.clinicavt.models.client.ClientDto;
 import br.com.clinicavt.models.client.ClientUpdate;
@@ -56,6 +58,14 @@ public class ClientsController {
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(client.getId()).toUri();
 
         return ResponseEntity.status(HttpStatus.OK).location(location).body(client);
+    }
+
+    @PutMapping("/{id}/adresses")
+    @Transactional
+    public ResponseEntity<Client> updateAdresses(@PathVariable("id") UUID id, @RequestBody AdressesUpdate adressesUpdate){
+        service.update_adresses(id, adressesUpdate);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }

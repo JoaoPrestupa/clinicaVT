@@ -1,6 +1,6 @@
 package br.com.clinicavt.models.veterinarian;
 
-import br.com.clinicavt.models.AdressesEmbeddable;
+import br.com.clinicavt.models.adresses.AdressesEmbeddable;
 
 import java.math.BigDecimal;
 import java.util.UUID;
