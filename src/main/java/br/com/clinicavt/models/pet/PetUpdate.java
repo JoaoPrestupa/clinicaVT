@@ -10,13 +10,11 @@ import java.util.UUID;
 public record PetUpdate(
         UUID id,
         String nome,
-        UUID client_id,
-        Consult dataUltimaConsulta,
+        Client client,
         Boolean ativo,
         String descricaoPet,
         PetEnum animal,
         String raca,
         Date nascimento ,
-        String welfare_animal,
-        Veterinanian vacinacao) {
+        String welfare_animal) {
 }

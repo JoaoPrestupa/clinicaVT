@@ -1,6 +1,7 @@
 package br.com.clinicavt.services;
 
 import br.com.clinicavt.models.client.Client;
+import br.com.clinicavt.models.client.ClientDto;
 import br.com.clinicavt.repositories.ClientRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;

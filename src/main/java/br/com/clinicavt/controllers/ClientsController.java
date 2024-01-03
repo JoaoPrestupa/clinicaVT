@@ -53,8 +53,6 @@ public class ClientsController {
     public ResponseEntity<Client> update(@RequestBody @Valid ClientUpdate clients){
         var client = repository.getReferenceById(clients.id());
         client.updateClients(clients);
-        service.create(client); // ! Testar retira-la pra ver se realmente é necessária.
-        client.setId(clients.id()); // !
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(client.getId()).toUri();
 
         return ResponseEntity.status(HttpStatus.OK).location(location).body(client);

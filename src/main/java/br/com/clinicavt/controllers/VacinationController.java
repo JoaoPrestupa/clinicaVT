@@ -52,8 +52,6 @@ public class VacinationController {
     public ResponseEntity<Vacination> update (@RequestBody @Valid VacinationUpdate vacinationUpdate){
         var vacination = repository.getReferenceById(vacinationUpdate.id());
         vacination.updateVacination(vacinationUpdate);
-        service.create(vacination);
-        vacination.setId(vacination.getId());
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(vacination.getId()).toUri();
 
         return ResponseEntity.status(HttpStatus.OK).location(location).body(vacination);

@@ -24,7 +24,7 @@ public class Veterinanian extends RepresentationModel<Veterinanian> implements S
     private static final long serialVersionUUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @NotBlank
@@ -48,7 +48,6 @@ public class Veterinanian extends RepresentationModel<Veterinanian> implements S
     private Boolean ativo;
 
     public Veterinanian(VeterinarianDto veterinarianDto){
-        this.id = UUID.randomUUID();
         this.data = veterinarianDto.data();
         this.adress = veterinarianDto.adress();
         this.email = veterinarianDto.email();

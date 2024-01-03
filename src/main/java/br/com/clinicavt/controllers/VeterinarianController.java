@@ -52,9 +52,6 @@ public class VeterinarianController {
     public ResponseEntity<Veterinanian> update(@RequestBody @Valid VeterinarianUpdate veterinarianUpdate){
         var veterian = repository.getReferenceById(veterinarianUpdate.id());
         veterian.updateVeterinarian(veterinarianUpdate);
-        service.create(veterian);
-        veterian.setId(veterinarianUpdate.id());
-
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(veterian.getId()).toUri();
 
         return ResponseEntity.status(HttpStatus.OK).location(location).body(veterian);

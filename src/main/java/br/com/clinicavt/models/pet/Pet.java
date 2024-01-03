@@ -1,6 +1,7 @@
 package br.com.clinicavt.models.pet;
 
 import br.com.clinicavt.models.client.Client;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
     private static final Long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @NotBlank
@@ -42,22 +43,23 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date nascimento;
 
-    private String welfare_animal;
+    private String welfare_animal; // bem estar
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id")
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "client_id")
     private Client client;
 
     private Boolean ativo;
 
     public Pet(PetDto petsDto){
-        this.id = UUID.randomUUID();
         this.nome = petsDto.nome();
         this.descricaoPet = petsDto.descricaoPet();
         this.animal = petsDto.animal();
         this.raca = petsDto.raca();
         this.nascimento = petsDto.nascimento();
         this.welfare_animal = petsDto.welfare_animal();
+        this.client = petsDto.client();
         this.ativo = true;
     }
 
@@ -79,6 +81,9 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
         }
         if (dados.welfare_animal() != null){
             this.welfare_animal = dados.welfare_animal();
+        }
+        if (dados.client() != null){
+            this.client = dados.client();
         }
     }
 

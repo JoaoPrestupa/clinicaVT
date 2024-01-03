@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -32,7 +33,7 @@ public class Client extends RepresentationModel<Client> implements Serializable 
     private static final Long serialVersionUUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @NotBlank
     @Size(min = 5, message = "Um nome deve conter no mínimo 5 caracteres.")
@@ -47,7 +48,6 @@ public class Client extends RepresentationModel<Client> implements Serializable 
 
     private String telefone;
 
-    @Temporal(TemporalType.DATE)
     private Date nascimento;
 
     @NotBlank
@@ -55,15 +55,12 @@ public class Client extends RepresentationModel<Client> implements Serializable 
     @Column(unique = true)
     private String cpf;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Pet> pet_id;
+    @OneToMany(mappedBy = "client")
+    private List<Pet> petList;
 
     private Boolean ativo;
 
     public void updateClients (ClientUpdate dados){
-        if (dados.pet_id() != null){
-            this.pet_id = dados.pet_id();
-        }
         if (dados.nome() != null){
             this.nome = dados.nome();
         }
@@ -85,8 +82,6 @@ public class Client extends RepresentationModel<Client> implements Serializable 
     }
 
     public Client(@Valid ClientDto clinicaDto){
-        this.pet_id = clinicaDto.pet_id();
-        this.id = UUID.randomUUID();
         this.nome = clinicaDto.nome();
         this.dataCadastro = clinicaDto.dataCadastro();
         this.email = clinicaDto.email();

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 public record ClientUpdate(
-        List<Pet> pet_id,
 
         UUID id,
         String nome,

@@ -23,7 +23,7 @@ public class Finance extends RepresentationModel<Finance> implements Serializabl
     @Id
     private UUID id;
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private Integer codigo;
     @NotBlank
     private Employe salarioColaborador;
@@ -36,7 +36,6 @@ public class Finance extends RepresentationModel<Finance> implements Serializabl
 
 
     public Finance(FinanceDto financeiroDto){
-        this.id = UUID.randomUUID();
         this.salarioColaborador = financeiroDto.salarioColaborador();
         this.valorConsulta = financeiroDto.valorConsulta();
         this.valorVacinacao = financeiroDto.valorVacinacao();

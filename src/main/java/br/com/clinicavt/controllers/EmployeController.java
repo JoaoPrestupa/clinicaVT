@@ -53,8 +53,6 @@ public class EmployeController {
     public ResponseEntity<Employe> update(@RequestBody @Valid EmployeUpdate employes){
         var employe = repository.getReferenceById(employes.id());
         employe.updateEmploye(employes);
-        service.create(employe);
-        employe.setId(employes.id());
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(employe.getId()).toUri();
 
         return ResponseEntity.status(HttpStatus.OK).location(location).body(employe);

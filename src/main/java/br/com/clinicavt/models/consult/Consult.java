@@ -24,7 +24,7 @@ public class Consult extends RepresentationModel<Consult> implements Serializabl
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Temporal(TemporalType.DATE)
     private Date date;

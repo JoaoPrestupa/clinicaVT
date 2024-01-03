@@ -23,7 +23,7 @@ public class Employe extends RepresentationModel<Employe> implements Serializabl
     private static final Long serialVersionUUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @NotBlank
@@ -40,7 +40,6 @@ public class Employe extends RepresentationModel<Employe> implements Serializabl
     private Boolean ativo;
 
     public Employe(EmployeDto colaboradorDto){
-        this.id = UUID.randomUUID();
         this.dataEntrada = colaboradorDto.dataEntrada();
         this.nome = colaboradorDto.nome();
         this.funcao = colaboradorDto.funcao();

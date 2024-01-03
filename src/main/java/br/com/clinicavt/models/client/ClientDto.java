@@ -14,6 +14,5 @@ public record ClientDto(String nome,
                         String telefone,
                         Boolean ativo,
                         Date nascimento,
-                        String cpf,
-                        List<Pet> pet_id) {
+                        String cpf) {
 }

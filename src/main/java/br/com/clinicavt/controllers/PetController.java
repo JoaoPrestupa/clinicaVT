@@ -52,8 +52,6 @@ public class PetController {
     public ResponseEntity<Pet> update (@RequestBody @Valid PetUpdate pets){
         var pet = repository.getReferenceById(pets.id());
         pet.updatePet(pets);
-        service.create(pet);
-        pet.setId(pets.id());
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pets.id()).toUri();
 
         return ResponseEntity.status(HttpStatus.OK).location(location).body(pet);

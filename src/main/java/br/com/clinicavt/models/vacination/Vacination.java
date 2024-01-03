@@ -25,7 +25,7 @@ public class Vacination extends RepresentationModel<Vacination> implements Seria
     private static final Long serialVersionUUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @ManyToOne
@@ -37,7 +37,6 @@ public class Vacination extends RepresentationModel<Vacination> implements Seria
     private Boolean active;
 
     public Vacination(VacinationDto vacinationDto){
-        this.id = UUID.randomUUID();
         this.petName = vacinationDto.petName();
         this.vaccine = vacinationDto.vaccine();
         this.active = true;
