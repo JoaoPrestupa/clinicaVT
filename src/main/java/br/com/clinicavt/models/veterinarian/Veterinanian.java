@@ -47,7 +47,11 @@ public class Veterinanian extends RepresentationModel<Veterinanian> implements S
 
     private Boolean ativo;
 
+    @Enumerated(EnumType.STRING)
+    private VeterinarianDetails veterinarianDetails;
+
     public Veterinanian(VeterinarianDto veterinarianDto){
+        this.name = veterinarianDto.name();
         this.data = veterinarianDto.data();
         this.adress = veterinarianDto.adress();
         this.email = veterinarianDto.email();
@@ -60,9 +64,6 @@ public class Veterinanian extends RepresentationModel<Veterinanian> implements S
         if (data.name() != null){
             this.name = data.name();
         }
-        if (data.adress() != null){
-            this.adress = data.adress();
-        }
         if (data.email() != null){
             this.email = data.email();
         }
@@ -71,6 +72,9 @@ public class Veterinanian extends RepresentationModel<Veterinanian> implements S
         }
         if (data.salary() != null){
             this.salary = data.salary();
+        }
+        if (data.veterinanDetails() != null){
+            this.veterinarianDetails = data.veterinanDetails();
         }
     }
 

@@ -1,5 +1,6 @@
 package br.com.clinicavt.controllers;
 
+import br.com.clinicavt.models.adresses.AdressesUpdate;
 import br.com.clinicavt.models.veterinarian.Veterinanian;
 import br.com.clinicavt.models.veterinarian.VeterinarianDto;
 import br.com.clinicavt.models.veterinarian.VeterinarianUpdate;
@@ -28,7 +29,7 @@ public class VeterinarianController {
     private VeterinarianRepository repository;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Veterinanian>> getById(UUID id){
+    public ResponseEntity<Optional<Veterinanian>> getById(@PathVariable UUID id){
         var veterinarian = service.getById(id);
         return ResponseEntity.status(HttpStatus.OK).body(veterinarian);
     }
@@ -39,7 +40,7 @@ public class VeterinarianController {
     }
 
     @PostMapping
-    public ResponseEntity<Veterinanian> create(@RequestBody @Valid VeterinarianDto veterinarian){
+    public ResponseEntity<Veterinanian> create(@RequestBody VeterinarianDto veterinarian){
         var veterinarianCreate = new Veterinanian(veterinarian);
         service.create(veterinarianCreate);
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(veterinarianCreate.getId()).toUri();
@@ -49,12 +50,20 @@ public class VeterinarianController {
 
     @PutMapping
     @Transactional
-    public ResponseEntity<Veterinanian> update(@RequestBody @Valid VeterinarianUpdate veterinarianUpdate){
+    public ResponseEntity<Veterinanian> update(@RequestBody VeterinarianUpdate veterinarianUpdate){
         var veterian = repository.getReferenceById(veterinarianUpdate.id());
         veterian.updateVeterinarian(veterinarianUpdate);
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(veterian.getId()).toUri();
 
         return ResponseEntity.status(HttpStatus.OK).location(location).body(veterian);
+    }
+
+    @PutMapping("/{id}/adresses")
+    @Transactional
+    public ResponseEntity<Veterinanian> updateAdresses(@PathVariable("id") UUID id, @RequestBody AdressesUpdate adressesUpdate){
+        service.update_adresses(id, adressesUpdate);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }

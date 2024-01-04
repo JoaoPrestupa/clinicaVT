@@ -1,6 +1,7 @@
 package br.com.clinicavt.services;
 
 import br.com.clinicavt.models.employe.Employe;
+import br.com.clinicavt.models.employe.EmployeDto;
 import br.com.clinicavt.repositories.EmployeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class EmployeService {
     }
 
     public Optional<Employe> getById(UUID id){
-        if (repository.findById(id).isEmpty()){
+        if (!repository.existsById(id)){
             throw new EntityNotFoundException("ID inexistente ou não encontrado");
         }
         return repository.findById(id);

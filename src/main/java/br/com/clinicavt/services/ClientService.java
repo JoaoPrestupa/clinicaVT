@@ -20,6 +20,8 @@ public class ClientService {
     @Autowired
     private ClientRepository repository;
 
+    private Client model;
+
     public List<Client> getAll(){
         return repository.findAll();
     }
@@ -46,6 +48,15 @@ public class ClientService {
         AdressesEmbeddable newAdresses = new AdressesEmbeddable();
         newAdresses.adressesUpdate(adressesUpdate);
         repository.findById(id).get().setEndereco(newAdresses);
+    }
+
+    public void updateAdressesSimple (UUID id, AdressesUpdate adressesUpdate){
+        if (!repository.existsById(id)){
+            throw new EntityNotFoundException("ID inexistente ou inválido.");
+        }
+
+        model.updateAdress(adressesUpdate);
+
     }
 
 }

@@ -1,6 +1,8 @@
 package br.com.clinicavt.models.adresses;
 
 import jakarta.validation.constraints.Pattern;
+import lombok.Getter;
+import lombok.Setter;
 
 public record AdressesUpdate(
                              @Pattern(regexp = "\\d{8}")

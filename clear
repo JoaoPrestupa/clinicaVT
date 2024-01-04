@@ -1,0 +1,98 @@
+[33mcommit 188b91414c37690fae0bcbdef477a1377b517ebb[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Wed Jan 3 13:23:25 2024 -0300
+
+    Requisição get arrumada
+
+[33mcommit 25effd212a9b0dd2fd1bb30351eff64b2f414f27[m
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Tue Jan 2 13:47:35 2024 -0300
+
+    reestruturação do projeto
+
+[33mcommit 6a97387de68c192da1a23035878224b31b6eb235[m
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Mon Oct 30 12:56:19 2023 -0300
+
+    feature de veterinarian
+
+[33mcommit f66b32cf9010eaaec66c5f0f0ff89f709f5c6a36[m
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Wed Oct 25 13:11:27 2023 -0300
+
+    Terminado crud de clients e quase finalizado pet
+
+[33mcommit cfa1eaba83719ee594c0a1d08aabd94f2196cf4a[m
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Wed Oct 4 23:55:48 2023 -0300
+
+    Terminado o repository
+
+[33mcommit ee4ae12841faaef3d8856e313c8d7432e4e6f9c8[m
+Merge: 6e3aa3a 1e6de4f
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Sat Sep 2 18:10:20 2023 -0300
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 6e3aa3a76c67b3ace1c4d9ae85d82ddc3222928c[m
+Merge: d48fcdd e9afcce
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Fri Sep 1 00:03:16 2023 -0300
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 1e6de4fcbf0a2e7440826f038edb357fb0f9b088[m
+Merge: d48fcdd e9afcce
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Fri Sep 1 00:03:16 2023 -0300
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit d48fcdd311d91b4e60a037b05d12dde27164f110[m
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Tue Aug 15 23:32:40 2023 -0300
+
+    SERVICE, PAGINAÇÃO E PARCIAL DE CONTROLLER REALIZADO.
+
+[33mcommit e9afcce4d54f13deeccf1e112a60515112baa1c2[m
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Tue Aug 15 23:32:40 2023 -0300
+
+    SERVICE, PAGINAÇÃO E PARCIAL DE CONTROLLER REALIZADO.
+
+[33mcommit bf453965ecb2e9d1537e2915dd76ad663c70af4f[m
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Mon Aug 14 23:49:55 2023 -0300
+
+    CRUD feito, ajustar bugs
+
+[33mcommit ce0a9daaf7079a9afa6758ceb240f14a183a7e9d[m
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Sun Aug 13 23:22:51 2023 -0300
+
+    CRUD de consultas realizado. Falta veterinario
+
+[33mcommit fa1f28542e0f6e6cf2de6bc41aa6f159431255a4[m
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Wed Aug 2 13:46:12 2023 -0300
+
+    controllers implementados
+
+[33mcommit 639d3e10621399a17310073526616f97c31a12f0[m
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Tue Aug 1 13:46:43 2023 -0300
+
+    implementar consultascontroller
+
+[33mcommit 99283d30333a0eb4a9638677c7e41561e84cb530[m
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Tue Aug 1 13:28:34 2023 -0300
+
+    configuração
+
+[33mcommit 83b43bb28040aff1fa829aac2321d0e6b2693345[m
+Author: JoaoPrestupa <joao_prestupa11@hotmail.com>
+Date:   Tue Aug 1 13:26:25 2023 -0300
+
+    configuração

@@ -4,9 +4,11 @@ import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Embeddable
 @Getter
+@Setter
 public class AdressesEmbeddable {
 
     String cep;
@@ -31,15 +33,22 @@ public class AdressesEmbeddable {
     }
 
     public void adressesUpdate(AdressesUpdate data){
-        if (data.bairro() != null){
+        if (data.bairro() == null){
+
+        } else {
             this.bairro = data.bairro();
-        }
-        if (data.cep() != null){
+        };
+        if (data.cep() == null){
+
+        } else {
             this.cep = data.cep();
         }
-        if (data.numero() != null){
+        if (data.numero() == null){
+
+        } else {
             this.numero = data.numero();
         }
+
         if (data.uf() != null){
             this.uf = data.uf();
         }

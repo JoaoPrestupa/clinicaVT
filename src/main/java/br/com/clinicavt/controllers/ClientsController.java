@@ -63,7 +63,7 @@ public class ClientsController {
     @PutMapping("/{id}/adresses")
     @Transactional
     public ResponseEntity<Client> updateAdresses(@PathVariable("id") UUID id, @RequestBody AdressesUpdate adressesUpdate){
-        service.update_adresses(id, adressesUpdate);
+        service.updateAdressesSimple(id, adressesUpdate);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }

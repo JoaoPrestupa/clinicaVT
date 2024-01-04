@@ -2,6 +2,7 @@ package br.com.clinicavt.models.client;
 
 
 import br.com.clinicavt.models.adresses.AdressesEmbeddable;
+import br.com.clinicavt.models.adresses.AdressesUpdate;
 import br.com.clinicavt.models.pet.Pet;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -136,6 +137,19 @@ public class Client extends RepresentationModel<Client> implements Serializable 
     private List<Pet> petList;
 
     private Boolean ativo;
+
+    public void updateAdress(AdressesUpdate adressesUpdate){
+        AdressesEmbeddable newAdress = new AdressesEmbeddable();
+        if (adressesUpdate.bairro() != null){
+            newAdress.setBairro(adressesUpdate.bairro());
+        }
+        if (adressesUpdate.cep() != null){
+            newAdress.setCep(adressesUpdate.cep());
+        }
+        if (adressesUpdate.rua() != null){
+            newAdress.setRua(adressesUpdate.rua());
+        }
+    }
 
     public void updateClients (ClientUpdate dados){
         if (dados.nome() != null){
