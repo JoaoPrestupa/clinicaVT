@@ -3,6 +3,7 @@ package br.com.clinicavt.controllers;
 import br.com.clinicavt.models.pet.Pet;
 import br.com.clinicavt.models.pet.PetDto;
 import br.com.clinicavt.models.pet.PetUpdate;
+import br.com.clinicavt.models.vacination.VacinationEmbeddable;
 import br.com.clinicavt.repositories.PetRepository;
 import br.com.clinicavt.services.PetService;
 import jakarta.transaction.Transactional;
@@ -31,6 +32,13 @@ public class PetController {
         var pet = service.getById(id);
 
         return ResponseEntity.status(HttpStatus.OK).body(pet);
+    }
+
+    @PutMapping("/vacinar/{id}")
+    @Transactional
+    public ResponseEntity<Optional<Pet>> vacinar(@PathVariable ("id") UUID id, VacinationEmbeddable vacinationEmbeddable){
+        service.vacinar(id, vacinationEmbeddable);
+        return ResponseEntity.status(HttpStatus.OK).body(service.getById(id));
     }
 
     @GetMapping

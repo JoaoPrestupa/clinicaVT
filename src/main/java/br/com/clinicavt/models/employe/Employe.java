@@ -19,7 +19,16 @@ import java.util.UUID;
 @Table(name = "employe")
 public class Employe extends RepresentationModel<Employe> implements Serializable {
 
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     @Serial
+
     private static final Long serialVersionUUID = 1L;
 
     @Id
@@ -56,9 +65,6 @@ public class Employe extends RepresentationModel<Employe> implements Serializabl
         }
         if (dados.salario() != null){
             this.salario = dados.salario();
-        }
-        if (dados.dataEntrada() != null){
-            this.dataEntrada = dados.dataEntrada();
         }
     }
 

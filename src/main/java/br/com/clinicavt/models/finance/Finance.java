@@ -21,10 +21,8 @@ public class Finance extends RepresentationModel<Finance> implements Serializabl
     private static final Long serialVersionUUID = 1L;
 
     @Id
-    private UUID id;
-
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Integer codigo;
+    private UUID id;
     @NotBlank
     private Employe salarioColaborador;
     @NotBlank

@@ -26,85 +26,6 @@ import java.util.UUID;
 @Entity(name = "Client")
 @Table(name = "client")
 public class Client extends RepresentationModel<Client> implements Serializable {
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Date getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
-
-    public AdressesEmbeddable getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(AdressesEmbeddable endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public Date getNascimento() {
-        return nascimento;
-    }
-
-    public void setNascimento(Date nascimento) {
-        this.nascimento = nascimento;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public List<Pet> getPetList() {
-        return petList;
-    }
-
-    public void setPetList(List<Pet> petList) {
-        this.petList = petList;
-    }
-
-    public Boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(Boolean ativo) {
-        this.ativo = ativo;
-    }
 
     @Serial
     private static final Long serialVersionUUID = 1L;
@@ -171,6 +92,28 @@ public class Client extends RepresentationModel<Client> implements Serializable 
 
     public void delete(){
         this.ativo = false;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+    public void setId(UUID id) {
+        this.id = id;
+    }
+    public String getNome() {
+        return nome;
+    }
+    public void setEndereco(AdressesEmbeddable endereco) {
+        this.endereco = endereco;
+    }
+    public String getCpf() {
+        return cpf;
+    }
+    public Boolean getAtivo() {
+        return ativo;
+    }
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 
 }
