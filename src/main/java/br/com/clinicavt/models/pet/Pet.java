@@ -1,6 +1,7 @@
 package br.com.clinicavt.models.pet;
 
 import br.com.clinicavt.models.client.Client;
+import br.com.clinicavt.models.vacination.VacinationEmbeddable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -13,6 +14,7 @@ import org.springframework.hateoas.RepresentationModel;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -50,6 +52,11 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
     @JoinColumn(name = "client_id")
     private Client client;
 
+    @ManyToMany
+    @JoinTable(name = "pet_vacination")
+    @Embedded
+    private List<VacinationEmbeddable> vaccines;
+
     private Boolean ativo;
 
     public Pet(PetDto petsDto){
@@ -85,6 +92,10 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
         if (dados.client() != null){
             this.client = dados.client();
         }
+    }
+
+    public void vacinar(VacinationEmbeddable vacinationEmbeddable){
+        this.vaccines.add(vacinationEmbeddable);
     }
 
     public void delete(){

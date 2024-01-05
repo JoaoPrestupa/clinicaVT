@@ -11,6 +11,8 @@ import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 @Table(name = "vacination")
@@ -19,26 +21,27 @@ import java.util.UUID;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-public class Vacination extends RepresentationModel<Vacination> implements Serializable {
-
-    @Serial
-    private static final Long serialVersionUUID = 1L;
+@Embeddable
+public class VacinationEmbeddable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne
-    private Pet petName;
+    @ManyToMany(mappedBy = "vaccines")
+    private List<Pet> pets;
 
-    @NotBlank
-    private String vaccine;
+    private List<String> vaccines;
 
     private Boolean active;
 
-    public Vacination(VacinationDto vacinationDto){
-        this.petName = vacinationDto.petName();
-        this.vaccine = vacinationDto.vaccine();
+    public void setVaccines(String vaccines){
+        this.vaccines.add(vaccines);
+    }
+
+    public VacinationEmbeddable(VacinationDto vacinationDto){
+        this.pets = Collections.singletonList(vacinationDto.petName());
+        this.vaccines.add(vacinationDto.vaccine());
         this.active = true;
     }
 
@@ -47,11 +50,11 @@ public class Vacination extends RepresentationModel<Vacination> implements Seria
     }
 
     public void updateVacination (VacinationUpdate vacinationUpdate){
-        if (this.petName != null){
-            this.petName = vacinationUpdate.petName();
+        if (this.pets != null){
+            this.pets = Collections.singletonList(vacinationUpdate.petName());
         }
-        if (this.vaccine != null){
-            this.vaccine = vacinationUpdate.vaccine();
+        if (vacinationUpdate.vaccine() != null){
+            this.vaccines.add(vacinationUpdate.vaccine());
         }
     }
 
