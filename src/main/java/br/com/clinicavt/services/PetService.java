@@ -41,7 +41,8 @@ public class PetService {
         if (!repository.existsById(id)){
             throw new EntityNotFoundException("ID inexistente ou inválido.");
         }
-        Pet pet = repository.getReferenceById(id);
+        Pet pet =
+                repository.getReferenceById(id);
         pet.vacinar(dto);
     }
 

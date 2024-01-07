@@ -38,7 +38,7 @@ public class ClientsController {
 
     @GetMapping
     public ResponseEntity<List<Client>> getAll(){
-        return ResponseEntity.ok(service.getAll());
+        return ResponseEntity.ok().body(service.getAll());
     }
 
     @PostMapping

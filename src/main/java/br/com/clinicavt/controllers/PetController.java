@@ -58,9 +58,9 @@ public class PetController {
     @PutMapping
     @Transactional
     public ResponseEntity<Pet> update (@RequestBody @Valid PetUpdate pets){
-        var pet = repository.getReferenceById(pets.id());
+        var pet = repository.getReferenceById(pets.idPet());
         pet.updatePet(pets);
-        final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pets.id()).toUri();
+        final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pets.idPet()).toUri();
 
         return ResponseEntity.status(HttpStatus.OK).location(location).body(pet);
     }

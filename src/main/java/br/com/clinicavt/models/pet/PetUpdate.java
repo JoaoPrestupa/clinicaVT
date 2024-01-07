@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.UUID;
 
 public record PetUpdate(
-        UUID id,
+        UUID idPet,
         String nome,
         Client client,
         Boolean ativo,
